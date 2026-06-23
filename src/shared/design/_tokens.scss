@@ -1,0 +1,135 @@
+// ─── Speed-to-Lead design tokens ────────────────────────────
+// Restrained, editorial real-estate language: lots of whitespace, hairline
+// rules, one accent colour. The accent is per-prospect — the base value
+// here is the fallback; the listing page overrides --sl-accent at runtime
+// from the prospect's primary_color (the one allowed dynamic inline value).
+//
+// Auto-injected into every SCSS entry point via next.config.ts
+// (sassOptions.additionalData: `@use "tokens" as *;`).
+
+// Color ------------------------------------------------------
+$sl-ink: #14171a; // near-black, primary text
+$sl-ink-2: #3d444c; // secondary heading ink
+$sl-surface: #ffffff; // page background
+$sl-surface-2: #f7f8f9; // cards, input background
+$sl-surface-3: #eef0f2; // gallery placeholder, wells
+$sl-border: #e3e6e9; // dividers, card borders
+$sl-border-2: #d2d7dc; // input field border
+$sl-muted: #6b7280; // secondary text
+$sl-dim: #9aa1a9; // labels, captions
+$sl-accent: #1f6feb; // brand accent (overridden per prospect)
+$sl-accent-ink: #ffffff; // text on accent
+$sl-good: #1f9d57; // "responded fast" green
+$sl-warn: #b54708; // benchmark / slow amber
+
+// Typography -------------------------------------------------
+$font-display: "Fraunces", Georgia, "Times New Roman", serif; // listing headline + hero number
+$font-ui: "DM Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+// Font sizes (px)
+$fs-hero: 96px; // dashboard hero "8s"
+$fs-hero-sm: 56px; // hero on small screens
+$fs-price: 34px; // listing price
+$fs-h1: 28px; // listing address
+$fs-h2: 20px; // section headings
+$fs-lead: 17px; // intro / description
+$fs-body: 15px; // body
+$fs-input: 15px; // form fields
+$fs-label: 12px; // uppercase labels
+$fs-caption: 13px; // captions, byline
+
+// Font weights
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+
+// Line height
+$lh-tight: 1.1;
+$lh-snug: 1.35;
+$lh-body: 1.65;
+
+// Letter spacing
+$ls-label: 0.08em; // uppercase labels
+$ls-hero: -0.03em; // big display number
+
+// Layout -----------------------------------------------------
+$max-width: 980px; // listing column
+$max-width-narrow: 720px; // dashboard / prose column
+$radius: 12px; // cards
+$radius-sm: 8px; // inputs, buttons
+$radius-pill: 999px;
+
+// Spacing ----------------------------------------------------
+$pad-page-y: 40px;
+$pad-page-x: 28px;
+$gap-sm: 8px;
+$gap: 16px;
+$gap-lg: 28px;
+$gap-xl: 48px;
+
+// Hairlines --------------------------------------------------
+$rule-1: 1px;
+
+// Motion -----------------------------------------------------
+$ease: cubic-bezier(0.2, 0, 0, 1);
+$dur-fast: 120ms;
+$dur: 220ms;
+
+// Breakpoints ------------------------------------------------
+$bp-sm: 640px;
+$bp-md: 880px;
+
+// ════════════════════════════════════════════════════════════
+// Marketing page tokens (Replyte landing — design handoff)
+// A distinct system from the listing page: Space Grotesk display,
+// DM Mono labels, and a deliberate MULTI-accent palette (not one brand
+// colour). Emitted as --sl-mkt-* CSS vars in globals.scss.
+// ════════════════════════════════════════════════════════════
+
+// Type ----------------------------------------------------------
+$font-mkt-display: "Space Grotesk", "DM Sans", system-ui, sans-serif; // headlines, big numbers
+$font-mkt-mono: "DM Mono", ui-monospace, "SFMono-Regular", monospace; // eyebrows, meta
+
+// Neutrals / ink ----------------------------------------------
+$mkt-ink: #14171a;
+$mkt-ink-2: #3d444c;
+$mkt-muted: #6b7280;
+$mkt-muted-slate: #6b7785; // muted text AND the "slow / 15-hour" functional colour
+$mkt-dim: #9aa1a9;
+$mkt-white: #ffffff;
+$mkt-off: #f7f8f9; // alt section bg
+$mkt-warm-light: #f4f4f1; // why-us bg
+$mkt-warm-2: #eceae5; // inactive faq tabs / demo bg
+$mkt-hairline: #e3e6e9;
+$mkt-hairline-2: #e6e8ec;
+$mkt-hairline-3: #eef0f2;
+$mkt-dark-bg: #0d0f13; // dark sections
+$mkt-dark-surface: #1a1e26; // dark phone body
+
+// Accent system (base / light / dark) -------------------------
+$mkt-blue: #2f6bf2;
+$mkt-blue-light: #5b8dff;
+$mkt-blue-dark: #1d4fd7;
+$mkt-green: #1f9d57; // fast / 8 seconds / success
+$mkt-green-light: #3ddc84;
+$mkt-green-dark: #0f6b3a;
+$mkt-violet: #6d56cf; // qualifies the lead
+$mkt-violet-light: #a78bff;
+$mkt-violet-dark: #7c63d8;
+$mkt-coral: #e0623f; // never goes cold / follow-up
+$mkt-coral-light: #f0815f;
+
+// Radius / motion ---------------------------------------------
+$mkt-r-pill: 999px;
+$mkt-r-card: 22px;
+$mkt-r-panel: 32px;
+$mkt-r-md: 16px;
+$mkt-r-sm: 12px;
+$mkt-ease-spring: cubic-bezier(0.16, 1, 0.32, 1);
+$mkt-ease-smooth: cubic-bezier(0.2, 0, 0, 1);
+
+// Marketing breakpoints ---------------------------------------
+$bp-mkt-lg: 820px; // hero/pinned collapse
+$bp-mkt-md: 760px; // stat/how/why/demo grids → single col
+$bp-mkt-sm: 600px; // hero floating stage hidden
