@@ -38,10 +38,21 @@ export function formatSlot(iso: string): string {
 
 /** CSS modifier for a message bubble based on who sent it. */
 export function bubbleClass(role: Message["role"]): string {
-  return role === "assistant" ? "sl-msg sl-msg--assistant" : "sl-msg sl-msg--buyer";
+  return role === "assistant"
+    ? "sl-db-msg sl-db-msg--assistant"
+    : "sl-db-msg sl-db-msg--buyer";
 }
 
 /** Label for the sender under a bubble. */
 export function senderLabel(role: Message["role"], agentName: string): string {
   return role === "assistant" ? agentName : "Buyer";
+}
+
+/** "Jordan Avery" → "JA" — up to two initials for an avatar. */
+export function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  const first = parts[0]![0] ?? "";
+  const last = parts.length > 1 ? (parts[parts.length - 1]![0] ?? "") : "";
+  return (first + last).toUpperCase();
 }

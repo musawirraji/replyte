@@ -1,33 +1,71 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   formatResponseTime,
   formatBenchmark,
   firstResponderLine,
   respondedInSentence,
 } from "@/domain/lead/responseTime";
+import { compareWidths } from "@/domain/lead/stats";
 
-// Render-only. THE hero — the side-by-side timer that is the star of the
-// build. Our most-recent response time in huge type next to the industry
-// benchmark, with the "answer first" stat underneath. All copy/derivation is
-// imported from the domain layer.
+// The hero — a single north-star number (latest response time) that counts up
+// on load, with the industry benchmark demoted to a race below it. Premium-
+// fintech: one big trusted figure, calm supporting compare.
 
 export function ResponseHero({ responseSeconds }: { responseSeconds: number | null }) {
+  const [shown, setShown] = useState<number | null>(responseSeconds == null ? null : 0);
+  const w = compareWidths();
+
+  useEffect(() => {
+    if (responseSeconds == null) return;
+    let raf = 0;
+    const start = performance.now();
+    const dur = 900;
+    const tick = (now: number) => {
+      const k = Math.min(1, (now - start) / dur);
+      setShown(Math.round(responseSeconds * (1 - Math.pow(1 - k, 3))));
+      if (k < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [responseSeconds]);
+
   return (
-    <section className="sl-hero">
-      <div className="sl-hero__grid">
-        <div className="sl-hero__cell sl-hero__cell--ours">
-          <p className="sl-hero__num sl-hero__num--ours">
-            {formatResponseTime(responseSeconds)}
-          </p>
-          <p className="sl-hero__caption">{respondedInSentence(responseSeconds)}</p>
+    <section className="sl-db-hero">
+      <div className="sl-db-hero__main">
+        <span className="sl-db-hero__label">Latest response time</span>
+        <div className="sl-db-hero__num">
+          {shown == null ? "—" : formatResponseTime(shown)}
         </div>
-        <div className="sl-hero__cell">
-          <p className="sl-hero__num sl-hero__num--bench">{formatBenchmark()}</p>
-          <p className="sl-hero__caption">The average agent’s first response</p>
-        </div>
+        <p className="sl-db-hero__sub">{respondedInSentence(responseSeconds)}</p>
       </div>
-      <p className="sl-hero__stat">
-        <strong>{firstResponderLine()}</strong>
-      </p>
+
+      <div className="sl-db-hero__compare">
+        <div className="sl-db-hero__row">
+          <span className="sl-db-hero__rowlabel">You</span>
+          <span className="sl-db-hero__track">
+            <span
+              className="sl-db-hero__fill sl-db-hero__fill--you"
+              style={{ width: `${w.you}%` }}
+            />
+          </span>
+          <span className="sl-db-hero__rowval sl-db-hero__rowval--good">
+            {formatResponseTime(responseSeconds)}
+          </span>
+        </div>
+        <div className="sl-db-hero__row">
+          <span className="sl-db-hero__rowlabel">Industry</span>
+          <span className="sl-db-hero__track">
+            <span
+              className="sl-db-hero__fill sl-db-hero__fill--ind"
+              style={{ width: `${w.industry}%` }}
+            />
+          </span>
+          <span className="sl-db-hero__rowval">{formatBenchmark()}</span>
+        </div>
+        <p className="sl-db-hero__note">{firstResponderLine()}</p>
+      </div>
     </section>
   );
 }
