@@ -1,5 +1,7 @@
+import { randomBytes } from "node:crypto";
 import { createSupabaseAdminClient } from "./admin";
 import type { Availability, Prospect } from "@/domain/prospect/types";
+import type { AdminProspectInput } from "@/domain/prospect/adminInput";
 
 // ─── Prospect data access (infrastructure) ──────────────────
 // Typed reads against the prospects table via the service-role client.
@@ -71,6 +73,91 @@ export async function getProspectById(id: string): Promise<Prospect | null> {
     return null;
   }
   return data ? rowToProspect(data) : null;
+}
+
+// ─── Admin CRUD (operator console) ──────────────────────────
+
+/** All prospects, newest first — for the admin list. */
+export async function listAllProspects(): Promise<Prospect[]> {
+  const db = createSupabaseAdminClient();
+  const { data, error } = await db
+    .from("prospects")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) {
+    console.error("[prospects] listAllProspects:", error.message);
+    return [];
+  }
+  return (data ?? []).map(rowToProspect);
+}
+
+/** Map admin form input to the editable column set. */
+function inputToRow(input: AdminProspectInput) {
+  return {
+    slug: input.slug,
+    brand_name: input.brand_name,
+    agent_name: input.agent_name,
+    agent_phone: input.agent_phone,
+    listing_address: input.listing_address,
+    logo_url: input.logo_url || null,
+    primary_color: input.primary_color || "#1f6feb",
+    listing_price: input.listing_price ?? null,
+    listing_beds: input.listing_beds ?? null,
+    listing_baths: input.listing_baths ?? null,
+    listing_description: input.listing_description || null,
+    listing_photos: input.listing_photos ?? [],
+    availability: {
+      tz: input.tz || "America/Chicago",
+      days: [1, 2, 3, 4, 5],
+      hours: [10, 14, 17],
+    },
+  };
+}
+
+/** Create a prospect. Generates the secret dashboard_slug server-side. */
+export async function insertProspect(input: AdminProspectInput): Promise<Prospect | null> {
+  const db = createSupabaseAdminClient();
+  const dashboard_slug = `${input.slug}-${randomBytes(12).toString("hex")}`;
+  const { data, error } = await db
+    .from("prospects")
+    .insert({ ...inputToRow(input), dashboard_slug })
+    .select("*")
+    .single();
+  if (error) {
+    console.error("[prospects] insertProspect:", error.message);
+    return null;
+  }
+  return rowToProspect(data);
+}
+
+/** Update a prospect's editable fields (dashboard_slug is preserved). */
+export async function updateProspect(
+  id: string,
+  input: AdminProspectInput,
+): Promise<Prospect | null> {
+  const db = createSupabaseAdminClient();
+  const { data, error } = await db
+    .from("prospects")
+    .update(inputToRow(input))
+    .eq("id", id)
+    .select("*")
+    .single();
+  if (error) {
+    console.error("[prospects] updateProspect:", error.message);
+    return null;
+  }
+  return rowToProspect(data);
+}
+
+/** Delete a prospect (cascades to its leads/messages/bookings). */
+export async function deleteProspect(id: string): Promise<boolean> {
+  const db = createSupabaseAdminClient();
+  const { error } = await db.from("prospects").delete().eq("id", id);
+  if (error) {
+    console.error("[prospects] deleteProspect:", error.message);
+    return false;
+  }
+  return true;
 }
 
 /**

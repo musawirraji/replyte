@@ -29,6 +29,10 @@ const serverSchema = z.object({
   // n8n — the delayed follow-up drip (NOT the first reply).
   N8N_DRIP_WEBHOOK_URL: z.string().url().optional().or(z.literal("")),
   N8N_WEBHOOK_SECRET: z.string().optional(),
+
+  // Operator admin gate. A single shared secret that protects /admin (the
+  // prospect CRUD console). Not broker auth — see README security model.
+  ADMIN_KEY: z.string().min(1).optional(),
 });
 
 const publicSchema = z.object({
