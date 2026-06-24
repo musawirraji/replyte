@@ -97,6 +97,13 @@ export function EnquiryForm({
       <button className="sl-btn sl-btn--block" type="submit" disabled={submitting}>
         {submitting ? "Sending…" : "Text me about this home"}
       </button>
+
+      <p className="sl-enquiry__consent">
+        By entering your number you agree to receive text messages about this property from the
+        listing agent. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. See our{" "}
+        <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> &amp;{" "}
+        <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a>.
+      </p>
     </form>
   );
 }

@@ -2707,3 +2707,66 @@ html { scroll-behavior: smooth; }
 .mk-rb button:active {
   transform: translateY(1px);
 }
+
+// ─── Enquiry consent line + legal/policy pages ──────────────
+.sl-enquiry__consent {
+  margin: $gap 0 0;
+  font-size: 11.5px;
+  line-height: $lh-snug;
+  color: var(--sl-dim);
+  a {
+    color: var(--sl-muted);
+    text-decoration: underline;
+  }
+}
+
+.sl-legal {
+  max-width: $max-width-narrow;
+  margin: 0 auto;
+  padding: $pad-page-y $pad-page-x $gap-xl;
+  color: var(--sl-ink-2);
+
+  h1 {
+    font-family: $font-display;
+    font-size: $fs-h1;
+    font-weight: $fw-semibold;
+    color: var(--sl-ink);
+    margin: 0 0 $gap-sm;
+  }
+  h2 {
+    font-size: $fs-h2;
+    font-weight: $fw-semibold;
+    color: var(--sl-ink);
+    margin: $gap-xl 0 $gap-sm;
+  }
+  p,
+  li {
+    font-size: $fs-body;
+    line-height: $lh-body;
+  }
+  ul {
+    padding-left: 1.25em;
+    margin: 0 0 $gap;
+  }
+  li {
+    margin: 4px 0;
+  }
+  a {
+    color: var(--sl-accent);
+  }
+  strong {
+    color: var(--sl-ink);
+  }
+  blockquote {
+    margin: $gap 0;
+    padding: $gap $gap-lg;
+    border-left: 3px solid var(--sl-border-2);
+    background: var(--sl-surface-2);
+    border-radius: $radius-sm;
+  }
+}
+.sl-legal__updated {
+  color: var(--sl-dim);
+  font-size: $fs-caption;
+  margin: 0 0 $gap-xl;
+}
