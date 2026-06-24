@@ -2417,3 +2417,20 @@ html { scroll-behavior: smooth; }
   object-fit: cover !important;
   object-position: center 40% !important;
 }
+
+// ─── Button hover (the kept "my button" feel) ───────────────
+// Adds the arrow-nudge + press to the landing's CTA buttons. The arrow is the
+// last-child <span> in those buttons; carousel/faq nav buttons hold a bare
+// <svg> child so they are untouched.
+.mk-rb button {
+  transition: background-size 0.3s ease, background-color 0.25s ease, transform 0.12s ease;
+}
+.mk-rb button > span:last-child {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.32, 1) !important;
+}
+.mk-rb button:hover > span:last-child {
+  transform: translate(3px, -3px);
+}
+.mk-rb button:active {
+  transform: translateY(1px);
+}

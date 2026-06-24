@@ -33,7 +33,7 @@ export const REPLYTE_HTML = `
   <!-- centred copy -->
   <div style="position:relative;z-index:10;max-width:760px;">
     <span style="display:inline-flex;align-items:center;gap:9px;padding:8px 16px 8px 12px;border:1px solid rgba(255,255,255,.75);border-radius:999px;background:rgba(255,255,255,.5);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-size:13px;font-weight:600;color:#1d4fd7;box-shadow:0 10px 26px -18px rgba(20,23,26,.45);">
-      <span style="width:7px;height:7px;border-radius:50%;background:#2f6bf2;animation:dotpulse 2.6s ease infinite;"></span>Speed-to-lead for real estate
+      Speed-to-lead for real estate
     </span>
     <h1 style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(46px,6.4vw,88px);line-height:1.0;letter-spacing:-.035em;margin:26px 0 0;color:#14171a;text-wrap:balance;">
       Answer every buyer in <span style="color:#1f9d57;">8&nbsp;seconds.</span><br />Not <span style="color:#6b7785;">15&nbsp;hours.</span>
@@ -55,7 +55,7 @@ export const REPLYTE_HTML = `
     <div style="position:absolute;left:calc(50% - 150px);top:4px;width:300px;background:rgba(255,255,255,.6);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);border:1px solid rgba(255,255,255,.8);border-radius:26px;padding:15px 14px 17px;box-shadow:0 46px 80px -36px rgba(20,23,26,.5);animation:floaty 7s ease-in-out infinite;z-index:5;text-align:left;">
       <div style="display:flex;align-items:center;gap:9px;padding:2px 6px 11px;border-bottom:1px solid rgba(20,23,26,.08);">
         <span style="width:32px;height:32px;border-radius:50%;background:#14171a;color:#fff;display:grid;place-items:center;font-family:'Space Grotesk';font-weight:600;font-size:13px;">A</span>
-        <span style="display:flex;flex-direction:column;line-height:1.25;"><span style="font-size:13px;font-weight:600;color:#14171a;white-space:nowrap;">Aspen Realty</span><span style="font-size:11px;color:#1f9d57;font-weight:600;white-space:nowrap;">● Active now</span></span>
+        <span style="display:flex;flex-direction:column;line-height:1.25;"><span style="font-size:13px;font-weight:600;color:#14171a;white-space:nowrap;">Aspen Realty</span><span style="font-size:11px;color:#1f9d57;font-weight:600;white-space:nowrap;">Active now</span></span>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;padding:13px 2px 2px;">
         <div style="align-self:flex-end;max-width:84%;background:rgba(20,23,26,.07);color:#14171a;font-size:12.5px;line-height:1.45;padding:9px 12px;border-radius:14px 14px 4px 14px;">Hi, is 14 Aspen Court still available? Could I see it this weekend?</div>
@@ -113,9 +113,9 @@ export const REPLYTE_HTML = `
             <p style="margin:10px 0 0;font-size:14.5px;line-height:1.5;color:#6b7280;max-width:260px;">the average agent’s first reply to an online lead.</p>
             <div style="height:1px;background:#eef0f2;margin:18px 0;"></div>
             <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;">
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#6b7785;"></span>A hot lead cools within the hour</li>
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#6b7785;"></span>Most never get a second touch</li>
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#6b7785;"></span>By morning, they’ve already moved on</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#6b7785;"></span>A hot lead cools within the hour</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#6b7785;"></span>Most never get a second touch</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#6b7785;"></span>By morning, they’ve already moved on</li>
             </ul>
           </div>
         </div>
@@ -132,9 +132,9 @@ export const REPLYTE_HTML = `
             <p style="margin:10px 0 0;font-size:14.5px;line-height:1.5;color:#6b7280;max-width:260px;">of buyers go with the first agent who replies.</p>
             <div style="height:1px;background:#eef0f2;margin:18px 0;"></div>
             <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;">
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#2f6bf2;"></span>Speed beats brand</li>
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#2f6bf2;"></span>Speed beats price</li>
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#2f6bf2;"></span>First reply wins the relationship</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#2f6bf2;"></span>Speed beats brand</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#2f6bf2;"></span>Speed beats price</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#2f6bf2;"></span>First reply wins the relationship</li>
             </ul>
           </div>
         </div>
@@ -151,9 +151,9 @@ export const REPLYTE_HTML = `
             <p style="margin:10px 0 0;font-size:14.5px;line-height:1.5;color:#6b7280;max-width:260px;">of agents quit after a single follow-up.</p>
             <div style="height:1px;background:#eef0f2;margin:18px 0;"></div>
             <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;">
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#6d56cf;"></span>Most leads need 5+ touches</li>
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#6d56cf;"></span>Manual follow-up never scales</li>
-              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#6d56cf;"></span>The deal goes to whoever stays</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#6d56cf;"></span>Most leads need 5+ touches</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#6d56cf;"></span>Manual follow-up never scales</li>
+              <li style="display:flex;align-items:center;gap:11px;font-size:14px;color:#3d444c;"><span style="flex:0 0 auto;width:11px;height:1.5px;background:#6d56cf;"></span>The deal goes to whoever stays</li>
             </ul>
           </div>
         </div>
@@ -193,7 +193,6 @@ export const REPLYTE_HTML = `
             <span style="font-family:'DM Sans';font-size:14.5px;font-weight:600;letter-spacing:.005em;color:#ffffff;white-space:nowrap;">Never goes cold</span>
           </div>
         </div>
-        <div style="margin-top:30px;height:3px;width:128px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;"><div data-ref="pinBarRef" style="height:100%;width:25%;background:#fff;border-radius:999px;transition:width .35s ease;"></div></div>
         <div style="flex:1;margin:44px 28px 0 0;min-height:120px;background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.6px);background-size:20px 20px;-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 90%);mask-image:linear-gradient(180deg,#000 0%,transparent 90%);"></div>
       </div>
 
@@ -282,11 +281,6 @@ export const REPLYTE_HTML = `
         <div style="overflow:hidden;margin-top:clamp(20px,3vh,30px);max-width:560px;padding:0 24px;"><span data-hi-word style="display:inline-block;transform:translateY(110%);transition:transform .75s cubic-bezier(.16,1,.32,1);transition-delay:0.25s;font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#5f6670;">It offers real slots, confirms, and hands you a warm, qualified buyer. You just show up.</span></div>
       </div>
     </div>
-    <div data-hi-track style="position:absolute;left:50%;bottom:clamp(48px,8vh,84px);transform:translateX(-50%);z-index:3;display:flex;gap:9px;">
-      <span data-hi-pip style="width:28px;height:4px;border-radius:999px;background:#14171a;transition:background .4s ease;"></span>
-      <span data-hi-pip style="width:28px;height:4px;border-radius:999px;background:#e3e6e9;transition:background .4s ease;"></span>
-      <span data-hi-pip style="width:28px;height:4px;border-radius:999px;background:#e3e6e9;transition:background .4s ease;"></span>
-    </div>
   </div>
   <div data-hi-spacer style="height:300vh;"></div>
 </section>
@@ -327,7 +321,6 @@ export const REPLYTE_HTML = `
         </div>
 
         <div style="display:flex;align-items:center;gap:10px;font-family:'DM Mono';font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#6b7785;">
-          <span style="width:7px;height:7px;border-radius:50%;background:#1f9d57;box-shadow:0 0 8px #1f9d57;"></span>
           <span>Lead status: <strong style="color:#14171a;font-weight:600;"><span data-bind="dmDashText">waiting for enquiry…</span></strong></span>
         </div>
       </div>
@@ -337,16 +330,14 @@ export const REPLYTE_HTML = `
       <div style="position:relative;width:min(360px,100%);background:#1a1e26;border:1px solid rgba(255,255,255,.1);border-radius:36px;padding:20px 18px 22px;box-shadow:0 70px 130px -50px #000,0 0 110px -34px rgba(47,107,242,.45);">
         <div style="display:flex;align-items:center;gap:11px;padding:2px 4px 14px;border-bottom:1px solid rgba(255,255,255,.08);">
           <span style="width:38px;height:38px;border-radius:50%;background:#2f6bf2;color:#fff;display:grid;place-items:center;font-family:'Space Grotesk';font-weight:600;font-size:15px;">A</span>
-          <span style="display:flex;flex-direction:column;line-height:1.3;"><span style="font-size:14px;font-weight:600;color:#fff;">Aspen Realty</span><span style="font-size:11.5px;color:#3ddc84;font-weight:600;">● Active now</span></span>
+          <span style="display:flex;flex-direction:column;line-height:1.3;"><span style="font-size:14px;font-weight:600;color:#fff;">Aspen Realty</span><span style="font-size:11.5px;color:#3ddc84;font-weight:600;">Active now</span></span>
           <span style="margin-left:auto;display:inline-flex;align-items:baseline;gap:3px;font-family:'DM Mono';font-size:12px;color:rgba(255,255,255,.5);"><span style="color:#3ddc84;font-weight:500;"><span data-bind="dmTimerText">0.0</span></span>s</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:11px;padding:16px 2px 2px;min-height:230px;">
           <div style="align-self:flex-end;max-width:82%;background:rgba(255,255,255,.09);color:#e7e9ee;font-size:13px;line-height:1.45;padding:10px 13px;border-radius:15px 15px 4px 15px;">Hi, is 14 Aspen Court still available? Could I see it this weekend?</div>
           <div data-if="dmTypingShown" style="display:none;">
             <div style="align-self:flex-start;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.08);padding:11px 14px;border-radius:15px 15px 15px 4px;">
-              <span style="width:6px;height:6px;border-radius:50%;background:#aeb4bd;animation:tdot 1s infinite 0s;"></span>
-              <span style="width:6px;height:6px;border-radius:50%;background:#aeb4bd;animation:tdot 1s infinite .15s;"></span>
-              <span style="width:6px;height:6px;border-radius:50%;background:#aeb4bd;animation:tdot 1s infinite .3s;"></span>
+              <span style="font-family:'DM Mono';font-size:11.5px;letter-spacing:.06em;color:#aeb4bd;">drafting reply…</span>
             </div>
           </div>
           <div data-if="dmReplyShown" style="display:none;">
@@ -404,10 +395,8 @@ export const REPLYTE_HTML = `
         <div data-stack-card data-idx="0" style="position:absolute;left:50%;top:0px;width:100%;transform-origin:center bottom;will-change:transform,opacity;">
           <div style="background:#ffffff;border:1px solid #e6e8ea;border-radius:26px;box-shadow:0 40px 90px -40px rgba(20,23,26,.45);padding:11px 11px 0;">
             <div data-plate style="border-radius:18px;padding:21px 32px;position:relative;display:flex;align-items:center;justify-content:center;">
-              <span style="position:absolute;left:22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:rgba(20,23,26,.32);"></span>
-              <span data-plate-title style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.7vw,36px);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;">Live in minutes</span>
-              <span style="position:absolute;right:22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:rgba(20,23,26,.32);"></span>
-            </div>
+                            <span data-plate-title style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.7vw,36px);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;">Live in minutes</span>
+                          </div>
             <div style="padding:clamp(34px,4.5vw,56px) clamp(28px,4vw,48px) clamp(40px,5vw,60px);text-align:center;">
               <div style="width:84px;height:84px;border-radius:50%;border:1.5px solid #2f6bf2;display:grid;place-items:center;margin:0 auto;background:#2f6bf20f;">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2f6bf2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.3"/><path d="M12 13.5V9"/><path d="M9.5 2.5h5"/><path d="M18.8 6.2l1.4-1.4"/></svg>
@@ -419,10 +408,8 @@ export const REPLYTE_HTML = `
         <div data-stack-card data-idx="1" style="position:absolute;left:50%;top:82px;width:100%;transform-origin:center bottom;will-change:transform,opacity;">
           <div style="background:#ffffff;border:1px solid #e6e8ea;border-radius:26px;box-shadow:0 40px 90px -40px rgba(20,23,26,.45);padding:11px 11px 0;">
             <div data-plate style="border-radius:18px;padding:21px 32px;position:relative;display:flex;align-items:center;justify-content:center;">
-              <span style="position:absolute;left:22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:rgba(20,23,26,.32);"></span>
-              <span data-plate-title style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.7vw,36px);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;">Branded as you</span>
-              <span style="position:absolute;right:22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:rgba(20,23,26,.32);"></span>
-            </div>
+                            <span data-plate-title style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.7vw,36px);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;">Branded as you</span>
+                          </div>
             <div style="padding:clamp(34px,4.5vw,56px) clamp(28px,4vw,48px) clamp(40px,5vw,60px);text-align:center;">
               <div style="width:84px;height:84px;border-radius:50%;border:1.5px solid #1f9d57;display:grid;place-items:center;margin:0 auto;background:#1f9d570f;">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1f9d57" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5V4.5a1.5 1.5 0 0 1 1.5-1.5h7L21 12.5 12.5 21 3 11.5z"/><circle cx="7.8" cy="7.8" r="1.5"/></svg>
@@ -434,10 +421,8 @@ export const REPLYTE_HTML = `
         <div data-stack-card data-idx="2" style="position:absolute;left:50%;top:164px;width:100%;transform-origin:center bottom;will-change:transform,opacity;">
           <div style="background:#ffffff;border:1px solid #e6e8ea;border-radius:26px;box-shadow:0 40px 90px -40px rgba(20,23,26,.45);padding:11px 11px 0;">
             <div data-plate style="border-radius:18px;padding:21px 32px;position:relative;display:flex;align-items:center;justify-content:center;">
-              <span style="position:absolute;left:22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:rgba(20,23,26,.32);"></span>
-              <span data-plate-title style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.7vw,36px);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;">No CRM migration</span>
-              <span style="position:absolute;right:22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:rgba(20,23,26,.32);"></span>
-            </div>
+                            <span data-plate-title style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.7vw,36px);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;">No CRM migration</span>
+                          </div>
             <div style="padding:clamp(34px,4.5vw,56px) clamp(28px,4vw,48px) clamp(40px,5vw,60px);text-align:center;">
               <div style="width:84px;height:84px;border-radius:50%;border:1.5px solid #6d56cf;display:grid;place-items:center;margin:0 auto;background:#6d56cf0f;">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6d56cf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2.5v5M15 2.5v5"/><path d="M7 7.5h10v3.2a5 5 0 0 1-10 0V7.5z"/><path d="M12 15.7V21.5"/></svg>
@@ -449,10 +434,8 @@ export const REPLYTE_HTML = `
         <div data-stack-card data-idx="3" style="position:absolute;left:50%;top:246px;width:100%;transform-origin:center bottom;will-change:transform,opacity;">
           <div style="background:#ffffff;border:1px solid #e6e8ea;border-radius:26px;box-shadow:0 40px 90px -40px rgba(20,23,26,.45);padding:11px 11px 0;">
             <div data-plate style="border-radius:18px;padding:21px 32px;position:relative;display:flex;align-items:center;justify-content:center;">
-              <span style="position:absolute;left:22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:rgba(20,23,26,.32);"></span>
-              <span data-plate-title style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.7vw,36px);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;">Never off</span>
-              <span style="position:absolute;right:22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:rgba(20,23,26,.32);"></span>
-            </div>
+                            <span data-plate-title style="font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.7vw,36px);letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap;">Never off</span>
+                          </div>
             <div style="padding:clamp(34px,4.5vw,56px) clamp(28px,4vw,48px) clamp(40px,5vw,60px);text-align:center;">
               <div style="width:84px;height:84px;border-radius:50%;border:1.5px solid #e0623f;display:grid;place-items:center;margin:0 auto;background:#e0623f0f;">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#e0623f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.2A8.3 8.3 0 1 1 11.3 4a6.5 6.5 0 0 0 9.2 9.2z"/><path d="M18 3.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
@@ -468,8 +451,6 @@ export const REPLYTE_HTML = `
 
 <!-- ===== FAQ (folder tabs) ===== -->
 <section id="faq" data-screen-label="FAQ" style="position:relative;background:#f7f8f9;padding:clamp(40px,6vh,72px) clamp(24px,5vw,72px) clamp(80px,11vh,128px);overflow:hidden;">
-  <div style="position:absolute;left:7%;top:32%;width:54px;height:54px;border-radius:50%;background:#1f9d57;opacity:.9;pointer-events:none;"></div>
-  <div style="position:absolute;left:14%;top:24%;width:14px;height:14px;border-radius:50%;background:#1f9d57;pointer-events:none;"></div>
 
   <div style="display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono';font-size:12px;font-weight:500;letter-spacing:.12em;color:#14171a;padding-bottom:18px;border-bottom:1px solid #14171a;">
     <span>(FAQ)</span><span style="letter-spacing:.18em;">QUESTIONS</span><span>N.05</span>
@@ -478,18 +459,17 @@ export const REPLYTE_HTML = `
   <div style="position:relative;text-align:center;margin-top:clamp(40px,7vh,90px);">
     <h2 style="font-family:'Space Grotesk';font-weight:500;font-size:clamp(78px,13vw,210px);line-height:.86;letter-spacing:-.045em;margin:0;color:#14171a;">FAQ</h2>
     <div style="display:flex;align-items:flex-start;gap:clamp(14px,1.6vw,22px);justify-content:center;max-width:880px;margin:clamp(28px,4vh,46px) auto 0;">
-      <span style="flex:0 0 auto;width:clamp(20px,2.2vw,28px);height:clamp(20px,2.2vw,28px);border-radius:50%;background:#1f9d57;margin-top:.45em;"></span>
       <p style="font-family:'Space Grotesk';font-weight:400;font-size:clamp(22px,2.7vw,40px);line-height:1.16;letter-spacing:-.02em;color:#14171a;margin:0;text-align:left;">To keep things simple, we’ve answered the questions brokers actually ask before they ever pick up the phone.</p>
     </div>
   </div>
 
   <div style="max-width:1020px;margin:clamp(44px,7vh,86px) auto 0;">
     <div style="display:flex;align-items:flex-end;padding-left:clamp(8px,2vw,28px);">
-      <button data-faq-tab="0" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#ffffff;margin-right:-1.5px;margin-bottom:-2px;z-index:4;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;"><span style="width:13px;height:13px;border-radius:50%;background:#1f9d57;opacity:1;"></span>N°01</button>
-<button data-faq-tab="1" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#eceae5;margin-right:-1.5px;margin-bottom:0;z-index:1;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;"><span style="width:13px;height:13px;border-radius:50%;background:#1f9d57;opacity:0;"></span>N°02</button>
-<button data-faq-tab="2" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#eceae5;margin-right:-1.5px;margin-bottom:0;z-index:1;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;"><span style="width:13px;height:13px;border-radius:50%;background:#1f9d57;opacity:0;"></span>N°03</button>
-<button data-faq-tab="3" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#eceae5;margin-right:-1.5px;margin-bottom:0;z-index:1;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;"><span style="width:13px;height:13px;border-radius:50%;background:#1f9d57;opacity:0;"></span>N°04</button>
-<button data-faq-tab="4" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#eceae5;margin-right:-1.5px;margin-bottom:0;z-index:1;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;"><span style="width:13px;height:13px;border-radius:50%;background:#1f9d57;opacity:0;"></span>N°05</button>
+      <button data-faq-tab="0" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#ffffff;margin-right:-1.5px;margin-bottom:-2px;z-index:4;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;">N°01</button>
+<button data-faq-tab="1" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#eceae5;margin-right:-1.5px;margin-bottom:0;z-index:1;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;">N°02</button>
+<button data-faq-tab="2" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#eceae5;margin-right:-1.5px;margin-bottom:0;z-index:1;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;">N°03</button>
+<button data-faq-tab="3" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#eceae5;margin-right:-1.5px;margin-bottom:0;z-index:1;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;">N°04</button>
+<button data-faq-tab="4" style="position:relative;display:inline-flex;align-items:center;gap:9px;padding:13px clamp(16px,2vw,26px) 15px;border:1.5px solid #14171a;border-bottom:none;border-radius:13px 13px 0 0;background:#eceae5;margin-right:-1.5px;margin-bottom:0;z-index:1;cursor:pointer;font-family:'Space Grotesk';font-size:clamp(16px,1.9vw,25px);font-weight:500;color:#14171a;white-space:nowrap;">N°05</button>
     </div>
     <div style="position:relative;border:1.5px solid #14171a;border-radius:0 18px 18px 18px;background:#fff;min-height:clamp(360px,48vh,460px);margin-top:-1.5px;overflow:hidden;">
       <div style="padding:clamp(28px,4vw,52px) clamp(28px,4vw,52px) 90px;">
@@ -503,7 +483,6 @@ export const REPLYTE_HTML = `
 
       <div data-ref="faqPanelRef" style="position:absolute;left:0;right:0;top:0;bottom:70px;margin:clamp(14px,1.8vw,22px);background:rgba(31,157,87,.24);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);border:1px solid rgba(31,157,87,.5);border-radius:16px;padding:clamp(26px,3.6vw,46px);display:flex;flex-direction:column;justify-content:center;box-shadow:0 36px 70px -34px rgba(31,157,87,.55);">
         <div style="display:flex;align-items:center;gap:9px;margin-bottom:clamp(14px,2vw,22px);">
-          <span style="width:11px;height:11px;border-radius:50%;background:#1f9d57;box-shadow:0 0 0 4px rgba(31,157,87,.18);"></span>
           <span style="font-family:'DM Mono';font-size:11.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#0f5f38;">Answer &middot; <span data-bind="faqNo">N°01</span></span>
         </div>
         <p data-ref="faqAnsTextRef" style="font-family:'Space Grotesk';font-weight:400;font-size:clamp(19px,2.3vw,34px);line-height:1.3;letter-spacing:-.015em;color:#0c2a1a;margin:0;max-width:840px;"><span data-bind="faqAnswer">No — that's the whole point. It's tuned to read like a sharp, human agent: short, warm, on-brand. Most buyers never suspect, and you can review every thread.</span></p>

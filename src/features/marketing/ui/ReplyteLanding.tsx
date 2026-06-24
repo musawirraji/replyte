@@ -537,5 +537,5 @@ export function ReplyteLanding() {
     };
   }, []);
 
-  return <div ref={rootRef} dangerouslySetInnerHTML={{ __html: REPLYTE_HTML }} />;
+  return <div ref={rootRef} className="mk-rb" dangerouslySetInnerHTML={{ __html: REPLYTE_HTML }} />;
 }
