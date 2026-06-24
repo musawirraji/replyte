@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Prospect } from "@/domain/prospect/types";
 import { parsePhotoList } from "@/domain/prospect/adminInput";
+import { createSupabaseBrowserClient } from "@/infrastructure/supabase/browser";
 import { ProspectForm, type ProspectFields } from "../components/ProspectForm";
 
 // The operator console. Owns the create/edit form state + mutation flow;
@@ -51,6 +52,12 @@ export function AdminScreen({ prospects, appUrl }: { prospects: Prospect[]; appU
   const [editingId, setEditingId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Invite-a-broker state.
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteProspectId, setInviteProspectId] = useState(prospects[0]?.id ?? "");
+  const [inviteMsg, setInviteMsg] = useState<string | null>(null);
+  const [inviteBusy, setInviteBusy] = useState(false);
 
   function onField(name: keyof ProspectFields, value: string) {
     setFields((f) => ({ ...f, [name]: value }));
@@ -121,8 +128,34 @@ export function AdminScreen({ prospects, appUrl }: { prospects: Prospect[]; appU
     router.refresh();
   }
 
+  async function onInvite(e: React.FormEvent) {
+    e.preventDefault();
+    setInviteBusy(true);
+    setInviteMsg(null);
+    try {
+      const res = await fetch("/api/admin/invite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: inviteEmail.trim(), prospectId: inviteProspectId }),
+      });
+      const json = (await res.json()) as { ok: boolean; message?: string; error?: string };
+      if (!res.ok || !json.ok) {
+        setInviteMsg(json.error ?? "Could not send invite.");
+        return;
+      }
+      setInviteMsg(json.message ?? "Invite sent.");
+      setInviteEmail("");
+    } catch {
+      setInviteMsg("Network error.");
+    } finally {
+      setInviteBusy(false);
+    }
+  }
+
   async function logout() {
-    await fetch("/api/admin/login", { method: "DELETE" });
+    const supabase = createSupabaseBrowserClient();
+    await supabase.auth.signOut();
+    router.push("/login");
     router.refresh();
   }
 
@@ -182,6 +215,37 @@ export function AdminScreen({ prospects, appUrl }: { prospects: Prospect[]; appU
           ))
         )}
       </div>
+
+      <section className="sl-adm-invite">
+        <h2>Invite a broker</h2>
+        <p className="sl-adm-invite__hint">
+          They&rsquo;ll get an email to set a password, then see only this prospect&rsquo;s dashboard.
+        </p>
+        <form className="sl-adm-invite__form" onSubmit={onInvite}>
+          <input
+            className="sl-input"
+            type="email"
+            value={inviteEmail}
+            onChange={(e) => setInviteEmail(e.target.value)}
+            placeholder="broker@agency.com"
+          />
+          <select
+            className="sl-input"
+            value={inviteProspectId}
+            onChange={(e) => setInviteProspectId(e.target.value)}
+          >
+            {prospects.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.brand_name}
+              </option>
+            ))}
+          </select>
+          <button className="sl-btn" type="submit" disabled={inviteBusy || prospects.length === 0}>
+            {inviteBusy ? "Sending…" : "Send invite"}
+          </button>
+        </form>
+        {inviteMsg && <p className="sl-adm-invite__msg">{inviteMsg}</p>}
+      </section>
     </main>
   );
 }

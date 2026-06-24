@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { getProspectForDashboard } from "@/infrastructure/supabase/prospects";
+import { redirect } from "next/navigation";
 import {
-  listLeads,
-  getLeadWithThread,
-} from "@/infrastructure/supabase/leads";
+  getProspectForDashboard,
+  getProspectBySlug,
+} from "@/infrastructure/supabase/prospects";
+import { listLeads, getLeadWithThread } from "@/infrastructure/supabase/leads";
 import type { LeadWithThread } from "@/domain/lead/types";
+import { getAuthUser, isOperatorEmail } from "@/lib/auth";
+import { isMember } from "@/infrastructure/supabase/members";
 import { DashboardScreen } from "@/features/dashboard/ui/screens/DashboardScreen";
 
-// The read-only response-time dashboard. Gated by a secret key in the query
-// (?k=<dashboard_slug>) that must match the prospect's distinct, high-entropy
-// dashboard_slug — so the public listing slug never reveals this page.
-//
-// NOTE: this is security-by-obscurity, NOT real auth. Fine for a demo; see
-// README "Security notes". noindex so it never gets crawled.
+// The response-time dashboard. Two ways in:
+//  1) Pitch path — the secret ?k=<dashboard_slug> link (no login; for showing
+//     an unconverted prospect their own demo).
+//  2) Auth path — a signed-in operator, or a broker who is a member of this
+//     prospect (the real product, post-conversion).
 
 export const dynamic = "force-dynamic";
 
@@ -30,24 +32,38 @@ export default async function DashboardPage({ params, searchParams }: PageProps)
   const { slug } = await params;
   const { k } = await searchParams;
 
-  // Fail closed: no key, or a key that doesn't match → generic notice.
-  const prospect = k ? await getProspectForDashboard(slug, k) : null;
+  // 1 — secret-link pitch path.
+  let prospect = k ? await getProspectForDashboard(slug, k) : null;
+
+  // 2 — authenticated path (operator or member of this prospect).
   if (!prospect) {
-    return (
-      <main className="sl-notice">
-        <h1 className="sl-notice__title">Dashboard unavailable</h1>
-        <p className="sl-notice__body">
-          This dashboard link isn’t valid. Use the secret link from your setup.
-        </p>
-      </main>
-    );
+    const user = await getAuthUser();
+    if (!user) redirect(`/login?next=/${slug}/dashboard`);
+    const p = await getProspectBySlug(slug);
+    if (!p) {
+      return (
+        <main className="sl-notice">
+          <h1 className="sl-notice__title">Not found</h1>
+          <p className="sl-notice__body">No listing exists at this address.</p>
+        </main>
+      );
+    }
+    if (isOperatorEmail(user.email) || (await isMember(user.id, p.id))) {
+      prospect = p;
+    } else {
+      return (
+        <main className="sl-notice">
+          <h1 className="sl-notice__title">No access</h1>
+          <p className="sl-notice__body">
+            This account isn&rsquo;t linked to this listing.
+          </p>
+        </main>
+      );
+    }
   }
 
-  // Load every lead with its thread + booking (small N for a demo).
   const leadRows = await listLeads(prospect.id);
-  const withThreads = await Promise.all(
-    leadRows.map((l) => getLeadWithThread(l.id)),
-  );
+  const withThreads = await Promise.all(leadRows.map((l) => getLeadWithThread(l.id)));
   const leads = withThreads.filter((l): l is LeadWithThread => l !== null);
 
   return (

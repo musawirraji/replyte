@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { adminProspectSchema } from "@/domain/prospect/adminInput";
 import { updateProspect, deleteProspect } from "@/infrastructure/supabase/prospects";
-import { isAdminAuthed } from "@/lib/adminAuth";
+import { getOperator } from "@/lib/auth";
 
 // PUT /api/admin/prospects/[id] — update; DELETE — remove. Operator console.
 
@@ -9,7 +9,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
-  if (!(await isAdminAuthed())) {
+  if (!(await getOperator())) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
   const { id } = await params;
@@ -28,7 +28,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
 }
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
-  if (!(await isAdminAuthed())) {
+  if (!(await getOperator())) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
   const { id } = await params;

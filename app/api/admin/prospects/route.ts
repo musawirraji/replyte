@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { adminProspectSchema } from "@/domain/prospect/adminInput";
 import { insertProspect } from "@/infrastructure/supabase/prospects";
-import { isAdminAuthed } from "@/lib/adminAuth";
+import { getOperator } from "@/lib/auth";
 
 // POST /api/admin/prospects — create a prospect (operator console).
 
@@ -9,7 +9,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
-  if (!(await isAdminAuthed())) {
+  if (!(await getOperator())) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
   const parsed = adminProspectSchema.safeParse(await req.json().catch(() => null));

@@ -2930,3 +2930,39 @@ html { scroll-behavior: smooth; }
   font-size: $fs-body;
   margin: 0;
 }
+
+.sl-adm-invite {
+  margin-top: $gap-xl;
+  padding: $gap-lg;
+  background: var(--sl-surface-2);
+  border: $rule-1 solid var(--sl-border);
+  border-radius: $radius;
+
+  h2 {
+    font-size: $fs-h2;
+    font-weight: $fw-semibold;
+    margin: 0 0 4px;
+  }
+}
+.sl-adm-invite__hint {
+  font-size: $fs-caption;
+  color: var(--sl-muted);
+  margin: 0 0 $gap;
+}
+.sl-adm-invite__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  .sl-input {
+    flex: 1 1 200px;
+  }
+  .sl-btn {
+    flex: 0 0 auto;
+  }
+}
+.sl-adm-invite__msg {
+  margin: $gap 0 0;
+  font-size: $fs-caption;
+  color: var(--sl-ink-2);
+}

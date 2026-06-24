@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { serverEnv, publicEnv } from "@/lib/env";
-import { isAdminAuthed } from "@/lib/adminAuth";
+import { redirect } from "next/navigation";
+import { publicEnv } from "@/lib/env";
+import { getAuthUser, isOperatorEmail } from "@/lib/auth";
 import { listAllProspects } from "@/infrastructure/supabase/prospects";
-import { AdminLogin } from "@/features/admin/ui/AdminLogin";
 import { AdminScreen } from "@/features/admin/ui/screens/AdminScreen";
 
-// Operator console at /admin — create/edit/delete prospects (the "skin a new
-// prospect" workflow as a UI instead of raw DB rows). Gated by ADMIN_KEY.
-// This is operator-only; broker auth remains out of scope (spec §15).
+// Operator console at /admin — create/edit/delete prospects and invite brokers.
+// Gated by Supabase Auth + the OPERATOR_EMAILS allowlist. Broker accounts only
+// reach their own dashboard, never this page (spec §15 → now a real product).
 
 export const dynamic = "force-dynamic";
 
@@ -17,17 +17,19 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminPage() {
-  if (!serverEnv.ADMIN_KEY) {
+  const user = await getAuthUser();
+  if (!user) redirect("/login?next=/admin");
+
+  if (!isOperatorEmail(user.email)) {
     return (
       <main className="sl-notice">
-        <h1 className="sl-notice__title">Admin not configured</h1>
+        <h1 className="sl-notice__title">No access</h1>
         <p className="sl-notice__body">
-          Set <code>ADMIN_KEY</code> in your environment to enable the operator console.
+          This account isn&rsquo;t an operator. Sign in with an operator account.
         </p>
       </main>
     );
   }
-  if (!(await isAdminAuthed())) return <AdminLogin />;
 
   const prospects = await listAllProspects();
   return <AdminScreen prospects={prospects} appUrl={publicEnv.NEXT_PUBLIC_APP_URL} />;

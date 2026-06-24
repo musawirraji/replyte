@@ -30,9 +30,10 @@ const serverSchema = z.object({
   N8N_DRIP_WEBHOOK_URL: z.string().url().optional().or(z.literal("")),
   N8N_WEBHOOK_SECRET: z.string().optional(),
 
-  // Operator admin gate. A single shared secret that protects /admin (the
-  // prospect CRUD console). Not broker auth — see README security model.
-  ADMIN_KEY: z.string().min(1).optional(),
+  // Operator allowlist — comma-separated emails. Anyone who signs in (via
+  // Supabase Auth) with one of these emails is an operator (full admin, can
+  // invite brokers); everyone else is a broker scoped to their prospect(s).
+  OPERATOR_EMAILS: z.string().optional(),
 });
 
 const publicSchema = z.object({
