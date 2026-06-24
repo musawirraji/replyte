@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 
-// Root layout. Fonts: Fraunces for the listing headline + the dashboard
-// hero number (editorial weight); DM Sans for all UI. The per-prospect
+// Root layout. Fonts: Space Grotesk for display (listing headline + dashboard
+// hero number); DM Sans for all UI; DM Mono for labels. The per-prospect
 // brand accent is applied on the page root, not here.
 
 export const metadata: Metadata = {
@@ -25,10 +25,10 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        {/* DM Sans = UI everywhere · Fraunces = listing display · Space
-            Grotesk + DM Mono = marketing display + labels. */}
+        {/* DM Sans = UI everywhere · Space Grotesk = display (listing +
+            dashboard + marketing) · DM Mono = labels. */}
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
