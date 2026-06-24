@@ -1,4 +1,5 @@
 import type { Prospect } from "@/domain/prospect/types";
+import type { Slot } from "@/domain/booking/slots";
 import { formatPrice, formatCount } from "@/domain/prospect/listing";
 
 // ─── The Claude qualifier prompt (pure) ─────────────────────
@@ -20,6 +21,13 @@ export function buildListingBlock(p: Prospect): string {
   return `<listing>\n${lines.join("\n")}\n</listing>`;
 }
 
+/** The bookable viewing windows the model may offer (and only these). */
+export function buildAvailableSlotsBlock(slots: Slot[]): string {
+  if (!slots.length) return "";
+  const lines = slots.map((s) => `${s.datetime} — ${s.label}`);
+  return `<available_slots>\n${lines.join("\n")}\n</available_slots>`;
+}
+
 /**
  * Compose the full system prompt for a given prospect + buyer.
  * Persona + rules first, then the grounded listing facts last so the model
@@ -28,6 +36,7 @@ export function buildListingBlock(p: Prospect): string {
 export function buildQualifierSystemPrompt(
   prospect: Prospect,
   buyerName: string,
+  slots: Slot[] = [],
 ): string {
   const persona = `
 You are ${prospect.agent_name}, a sharp, warm human real-estate agent at
@@ -51,16 +60,28 @@ ONE QUESTION — ask exactly one question per message. Never stack questions.
 GOAL — your job is to book an in-person viewing. Work through, in order and
 one at a time: (1) their timeline to buy, (2) whether they're financed or
 pre-approved, (3) when they could come see it. Once you know those, offer two
-or three specific viewing slots and ask them to pick one.
+or three of the times from <available_slots> (use the friendly label, not the
+raw datetime) and ask them to pick one.
+
+BOOKING — when ${buyerName} clearly picks one of the offered times, record that
+booking before you reply, then confirm it warmly in one short text. Only ever
+offer or book times that appear in <available_slots>; never invent a time.
 
 TONE — greet ${buyerName} by name in your first message and reference the
 property by its address. Sound like a real agent who is glad they reached out:
 warm, direct, a little human, never robotic or corporate.
 `.trim();
 
-  return [persona, "== LISTING FACTS (source of truth) ==", buildListingBlock(prospect)].join(
-    "\n\n",
-  );
+  const slotsBlock = buildAvailableSlotsBlock(slots);
+  return [
+    persona,
+    "== LISTING FACTS (source of truth) ==",
+    buildListingBlock(prospect),
+    slotsBlock ? "== AVAILABLE VIEWING SLOTS (offer/book only these) ==" : "",
+    slotsBlock,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 }
 
 /**

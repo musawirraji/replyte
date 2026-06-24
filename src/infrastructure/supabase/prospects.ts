@@ -1,9 +1,24 @@
 import { createSupabaseAdminClient } from "./admin";
-import type { Prospect } from "@/domain/prospect/types";
+import type { Availability, Prospect } from "@/domain/prospect/types";
 
 // ─── Prospect data access (infrastructure) ──────────────────
 // Typed reads against the prospects table via the service-role client.
-// Returns domain Prospect objects (or null), normalising the jsonb photos.
+// Returns domain Prospect objects (or null), normalising the jsonb columns.
+
+const DEFAULT_AVAILABILITY: Availability = {
+  tz: "America/Chicago",
+  days: [1, 2, 3, 4, 5],
+  hours: [10, 14, 17],
+};
+
+function parseAvailability(value: unknown): Availability {
+  const v = value && typeof value === "object" ? (value as Record<string, unknown>) : {};
+  return {
+    tz: typeof v.tz === "string" ? v.tz : DEFAULT_AVAILABILITY.tz,
+    days: Array.isArray(v.days) ? (v.days as number[]) : DEFAULT_AVAILABILITY.days,
+    hours: Array.isArray(v.hours) ? (v.hours as number[]) : DEFAULT_AVAILABILITY.hours,
+  };
+}
 
 function rowToProspect(row: Record<string, unknown>): Prospect {
   return {
@@ -23,6 +38,7 @@ function rowToProspect(row: Record<string, unknown>): Prospect {
     listing_photos: Array.isArray(row.listing_photos)
       ? (row.listing_photos as string[])
       : [],
+    availability: parseAvailability(row.availability),
     created_at: String(row.created_at),
   };
 }

@@ -1,6 +1,13 @@
 // ─── Prospect / listing types ───────────────────────────────
 // Mirrors the `prospects` table. Pure types — no I/O, no React.
 
+/** Per-agency viewing availability (drives slot generation). */
+export interface Availability {
+  tz: string; // IANA timezone, e.g. "America/Chicago"
+  days: number[]; // weekdays offered: 0=Sun … 6=Sat
+  hours: number[]; // local start hours, e.g. [10, 14, 17]
+}
+
 export interface Prospect {
   id: string;
   slug: string;
@@ -16,6 +23,7 @@ export interface Prospect {
   listing_baths: number | null;
   listing_description: string | null;
   listing_photos: string[];
+  availability: Availability;
   created_at: string;
 }
 

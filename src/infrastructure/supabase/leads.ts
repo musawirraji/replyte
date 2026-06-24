@@ -1,12 +1,17 @@
 import { createSupabaseAdminClient } from "./admin";
 import type {
   Lead,
+  LeadStage,
   Message,
   Booking,
   MessageRole,
   MessageChannel,
   LeadWithThread,
 } from "@/domain/lead/types";
+import type { Slot } from "@/domain/booking/slots";
+import { formatSlotInTz } from "@/domain/booking/slots";
+import { getProspectById } from "./prospects";
+import { sendEmail } from "@/infrastructure/resend/email";
 
 // ─── Lead / message / booking data access (infrastructure) ──
 // Typed reads + writes via the service-role client. Routes and the dashboard
@@ -75,6 +80,35 @@ export async function insertMessage(args: {
   if (error) console.error("[leads] insertMessage:", error.message);
 }
 
+/** A single lead by id. */
+export async function getLeadById(leadId: string): Promise<Lead | null> {
+  const db = createSupabaseAdminClient();
+  const { data, error } = await db
+    .from("leads")
+    .select("*")
+    .eq("id", leadId)
+    .maybeSingle();
+  if (error) {
+    console.error("[leads] getLeadById:", error.message);
+    return null;
+  }
+  return (data as Lead) ?? null;
+}
+
+/** Persist the slots last offered, so an SMS pick later resolves to a datetime. */
+export async function setOfferedSlots(leadId: string, slots: Slot[]): Promise<void> {
+  const db = createSupabaseAdminClient();
+  const { error } = await db.from("leads").update({ offered_slots: slots }).eq("id", leadId);
+  if (error) console.error("[leads] setOfferedSlots:", error.message);
+}
+
+/** Advance the lead's funnel stage. */
+export async function updateStage(leadId: string, stage: LeadStage): Promise<void> {
+  const db = createSupabaseAdminClient();
+  const { error } = await db.from("leads").update({ stage }).eq("id", leadId);
+  if (error) console.error("[leads] updateStage:", error.message);
+}
+
 /** Most recent lead for a buyer phone — used by the inbound reply webhook. */
 export async function getLatestLeadByPhone(phone: string): Promise<Lead | null> {
   const db = createSupabaseAdminClient();
@@ -123,6 +157,35 @@ export async function insertBooking(
     return null;
   }
   return data as Booking;
+}
+
+/**
+ * Book a viewing: write the booking, mark the lead booked, and email the buyer
+ * a confirmation (when an address/email are available). Shared by the SMS
+ * qualifier tool and POST /api/book. Does NOT post a thread message — the
+ * caller owns that (the model's SMS, or /api/book's confirmation line).
+ */
+export async function confirmBooking(
+  leadId: string,
+  slotIso: string,
+): Promise<Booking | null> {
+  const booking = await insertBooking(leadId, slotIso);
+  if (!booking) return null;
+  await updateStage(leadId, "booked");
+
+  const lead = await getLeadById(leadId);
+  if (lead?.buyer_email) {
+    const prospect = await getProspectById(lead.prospect_id);
+    if (prospect) {
+      const label = formatSlotInTz(slotIso, prospect.availability.tz);
+      await sendEmail({
+        to: lead.buyer_email,
+        subject: `Viewing booked — ${prospect.listing_address}`,
+        text: `Hi ${lead.buyer_name}, your viewing of ${prospect.listing_address} is booked for ${label}. ${prospect.agent_name} will see you there.\n\n— ${prospect.brand_name}`,
+      });
+    }
+  }
+  return booking;
 }
 
 /** All leads for a prospect, newest first (dashboard list). */

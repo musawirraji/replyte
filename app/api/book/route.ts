@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { insertBooking, insertMessage } from "@/infrastructure/supabase/leads";
+import { confirmBooking, insertMessage } from "@/infrastructure/supabase/leads";
 import { formatSlot } from "@/domain/lead/display";
 
 // ─── POST /api/book — accept a viewing slot ─────────────────
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   }
   const { leadId, slotDatetime } = parsed.data;
 
-  const booking = await insertBooking(leadId, slotDatetime);
+  const booking = await confirmBooking(leadId, slotDatetime);
   if (!booking) {
     return Response.json({ ok: false, error: "Could not book slot" }, { status: 500 });
   }

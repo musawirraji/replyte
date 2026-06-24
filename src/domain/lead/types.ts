@@ -1,8 +1,12 @@
 // ─── Lead / message / booking types ─────────────────────────
 // Mirror the leads, messages, bookings tables. Pure types.
 
+import type { Slot } from "@/domain/booking/slots";
+
 export type MessageRole = "assistant" | "buyer";
 export type MessageChannel = "sms" | "email" | "chat";
+
+export type LeadStage = "new" | "qualifying" | "slots_offered" | "booked";
 
 export interface Lead {
   id: string;
@@ -14,6 +18,8 @@ export interface Lead {
   created_at: string;
   first_response_at: string | null;
   response_seconds: number | null;
+  stage: LeadStage;
+  offered_slots: Slot[];
 }
 
 export interface Message {

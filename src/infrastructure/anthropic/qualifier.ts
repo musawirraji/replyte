@@ -13,9 +13,15 @@ import { serverEnv } from "@/lib/env";
 
 const SMS_MAX_TOKENS = 160;
 
+type GenerateTextArgs = Parameters<typeof generateText>[0];
+
 export interface GenerateReplyArgs {
   system: string;
   messages: CoreMessage[];
+  /** Optional tool set (e.g. book_viewing). Enables the qualifier to act. */
+  tools?: GenerateTextArgs["tools"];
+  /** Max tool→text steps the model may take (default 1, no tools). */
+  maxSteps?: number;
 }
 
 /**
@@ -26,6 +32,8 @@ export interface GenerateReplyArgs {
 export async function generateReply({
   system,
   messages,
+  tools,
+  maxSteps = 1,
 }: GenerateReplyArgs): Promise<string | null> {
   if (!process.env.ANTHROPIC_API_KEY) {
     console.warn("[anthropic] ANTHROPIC_API_KEY unset — skipping model call.");
@@ -38,6 +46,7 @@ export async function generateReply({
       messages,
       maxTokens: SMS_MAX_TOKENS,
       temperature: 0.6,
+      ...(tools ? { tools, maxSteps } : {}),
     });
     return text.trim();
   } catch (err) {
