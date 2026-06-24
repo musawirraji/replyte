@@ -25,6 +25,7 @@ export interface Lead {
 export interface Message {
   id: string;
   lead_id: string;
+  prospect_id: string;
   role: MessageRole;
   channel: MessageChannel;
   body: string;
@@ -34,6 +35,7 @@ export interface Message {
 export interface Booking {
   id: string;
   lead_id: string;
+  prospect_id: string;
   slot_datetime: string;
   status: "booked" | "cancelled" | "completed";
   created_at: string;

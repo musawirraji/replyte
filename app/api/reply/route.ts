@@ -56,7 +56,7 @@ export async function POST(req: Request) {
   if (!lead) return xml(twimlEmpty());
 
   // Log the inbound buyer message + mark them engaged.
-  await insertMessage({ leadId: lead.id, role: "buyer", channel: "sms", body });
+  await insertMessage({ leadId: lead.id, prospectId: lead.prospect_id, role: "buyer", channel: "sms", body });
   if (lead.stage === "new") await updateStage(lead.id, "qualifying");
 
   const prospect = await getProspectById(lead.prospect_id);
@@ -94,6 +94,6 @@ export async function POST(req: Request) {
   if (!drafted) return xml(twimlEmpty());
 
   const reply = clampSms(drafted);
-  await insertMessage({ leadId: lead.id, role: "assistant", channel: "sms", body: reply });
+  await insertMessage({ leadId: lead.id, prospectId: lead.prospect_id, role: "assistant", channel: "sms", body: reply });
   return xml(twimlMessage(reply));
 }

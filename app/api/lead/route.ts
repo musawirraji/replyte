@@ -87,7 +87,7 @@ export async function POST(req: Request) {
     computeResponseSeconds(lead.created_at, respondedAt.toISOString()) ?? 0;
   await Promise.all([
     stampFirstResponse(lead.id, respondedAt, responseSeconds),
-    insertMessage({ leadId: lead.id, role: "assistant", channel: "sms", body: reply }),
+    insertMessage({ leadId: lead.id, prospectId: prospect.id, role: "assistant", channel: "sms", body: reply }),
   ]);
 
   // 7 — Kick off the follow-up drip AFTER responding (never blocks the buyer).

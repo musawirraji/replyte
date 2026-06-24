@@ -66,6 +66,7 @@ export async function stampFirstResponse(
 /** Append a message to a lead's thread. */
 export async function insertMessage(args: {
   leadId: string;
+  prospectId: string;
   role: MessageRole;
   channel: MessageChannel;
   body: string;
@@ -73,6 +74,7 @@ export async function insertMessage(args: {
   const db = createSupabaseAdminClient();
   const { error } = await db.from("messages").insert({
     lead_id: args.leadId,
+    prospect_id: args.prospectId,
     role: args.role,
     channel: args.channel,
     body: args.body,
@@ -144,12 +146,13 @@ export async function getMessages(leadId: string): Promise<Message[]> {
 /** Insert a booked viewing slot. */
 export async function insertBooking(
   leadId: string,
+  prospectId: string,
   slotIso: string,
 ): Promise<Booking | null> {
   const db = createSupabaseAdminClient();
   const { data, error } = await db
     .from("bookings")
-    .insert({ lead_id: leadId, slot_datetime: slotIso })
+    .insert({ lead_id: leadId, prospect_id: prospectId, slot_datetime: slotIso })
     .select("*")
     .single();
   if (error) {
@@ -169,12 +172,14 @@ export async function confirmBooking(
   leadId: string,
   slotIso: string,
 ): Promise<Booking | null> {
-  const booking = await insertBooking(leadId, slotIso);
+  const lead = await getLeadById(leadId);
+  if (!lead) return null;
+
+  const booking = await insertBooking(leadId, lead.prospect_id, slotIso);
   if (!booking) return null;
   await updateStage(leadId, "booked");
 
-  const lead = await getLeadById(leadId);
-  if (lead?.buyer_email) {
+  if (lead.buyer_email) {
     const prospect = await getProspectById(lead.prospect_id);
     if (prospect) {
       const label = formatSlotInTz(slotIso, prospect.availability.tz);

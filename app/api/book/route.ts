@@ -29,6 +29,7 @@ export async function POST(req: Request) {
 
   await insertMessage({
     leadId,
+    prospectId: booking.prospect_id,
     role: "assistant",
     channel: "sms",
     body: `Booked your viewing for ${formatSlot(slotDatetime)}. See you there!`,
