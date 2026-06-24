@@ -498,6 +498,11 @@ export function ReplyteLanding() {
     // ── Action delegation ──
     const actions: Record<string, () => void> = {
       runDemo,
+      demo: () => {
+        window.location.href = "/demo-acres";
+      },
+      book: () =>
+        window.open("https://cal.com/musawir/30min", "_blank", "noopener,noreferrer"),
       pcA: () => setCard(0),
       pcB: () => setCard(1),
       pcC: () => setCard(2),
