@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Replyte — Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ── PRIMITIVES (raw values) ── */
+    --blue-700:#1d4fd7; --blue-500:#2f6bf2; --blue-300:#5b8dff;
+    --green-700:#0f6b3a; --green-500:#1f9d57; --green-300:#3ddc84;
+    --violet-500:#6d56cf; --violet-300:#a78bff;
+    --coral-500:#e0623f; --coral-300:#f0815f;
+    --ink-900:#14171a; --ink-700:#3d444c; --slate-500:#6b7785;
+    --gray-500:#6b7280; --gray-400:#9aa1a9;
+    --paper-0:#ffffff; --paper-50:#f7f8f9; --paper-100:#f4f4f1;
+    --line:#e3e6e9; --line-2:#e6e8ec;
+    --dark-900:#0d0f13; --dark-800:#1a1e26;
+
+    /* ── SEMANTIC (purpose) ── */
+    --bg:var(--paper-50); --surface:var(--paper-0); --surface-dark:var(--dark-900);
+    --text:var(--ink-900); --text-2:var(--ink-700); --muted:var(--gray-500); --dim:var(--gray-400); --slate:var(--slate-500);
+    --border:var(--line); --border-2:var(--line-2);
+    --accent:var(--blue-500); --accent-ink:#fff;
+    --fast:var(--green-500); --qualify:var(--violet-500); --followup:var(--coral-500); --slow:var(--slate-500);
+    --on-dark:rgba(255,255,255,.72); --on-dark-dim:rgba(255,255,255,.45);
+
+    /* ── TYPE ── */
+    --font-display:'Space Grotesk',system-ui,sans-serif;
+    --font-ui:'DM Sans',-apple-system,system-ui,sans-serif;
+    --font-mono:'DM Mono',ui-monospace,monospace;
+
+    /* ── RADII / ELEVATION / MOTION ── */
+    --r-sm:12px; --r-md:16px; --r-lg:22px; --r-pill:999px;
+    --shadow-card:0 12px 34px -24px rgba(20,23,26,.4);
+    --shadow-glass:0 34px 64px -34px rgba(20,23,26,.42);
+    --shadow-pop:0 18px 38px -18px rgba(20,23,26,.55);
+    --ease-spring:cubic-bezier(.16,1,.32,1); --ease-smooth:cubic-bezier(.2,0,0,1); --dur:.3s;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-ui);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 40px}
+  @media(max-width:720px){.wrap{padding:0 22px}}
+  section{padding:64px 0;border-top:1px solid var(--border)}
+  .eyebrow{font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 18px;display:flex;gap:10px;align-items:center}
+  .eyebrow b{font-family:var(--font-display);color:var(--text);font-weight:600;letter-spacing:0;text-transform:none;font-size:15px}
+  h2.h{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,3.4vw,40px);letter-spacing:-.02em;margin:0 0 8px}
+  .sub{color:var(--text-2);max-width:620px;margin:0 0 28px}
+  .grid{display:grid;gap:14px}
+  .row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+  code{font-family:var(--font-mono);font-size:.85em;color:var(--muted)}
+
+  /* Cover */
+  .cover{padding:90px 0 64px;border-top:none;position:relative;overflow:hidden}
+  .cover__glows{position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(40% 50% at 14% 10%,rgba(47,107,242,.16),transparent 70%),
+      radial-gradient(36% 46% at 86% 8%,rgba(109,86,207,.14),transparent 70%),
+      radial-gradient(40% 50% at 78% 90%,rgba(224,98,63,.10),transparent 70%);}
+  .cover__in{position:relative;z-index:1}
+  .cover .kick{font-family:var(--font-mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:26px}
+  .cover h1{font-family:var(--font-display);font-weight:700;font-size:clamp(44px,7vw,84px);line-height:.98;letter-spacing:-.035em;margin:0}
+  .cover h1 .g{background:linear-gradient(100deg,var(--blue-500),var(--violet-500));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cover p{font-size:19px;color:var(--text-2);max-width:600px;margin:24px 0 0}
+  .pill-dot{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:var(--r-pill);background:rgba(255,255,255,.6);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.8);font-size:13px;font-weight:600;color:var(--blue-700);box-shadow:var(--shadow-card)}
+
+  /* Color */
+  .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  @media(max-width:720px){.swatches{grid-template-columns:repeat(3,1fr)}}
+  .sw{border-radius:var(--r-sm);height:84px;display:flex;align-items:flex-end;padding:10px;font-family:var(--font-mono);font-size:10px;color:#fff;letter-spacing:.04em}
+  .sw.dk{color:var(--ink-900);border:1px solid var(--border)}
+  .sem{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+  @media(max-width:720px){.sem{grid-template-columns:repeat(2,1fr)}}
+  .sem__chip{border-radius:var(--r-sm);border:1px solid var(--border);overflow:hidden;background:#fff}
+  .sem__bar{height:48px}
+  .sem__t{padding:8px 10px;font-size:12px}
+  .sem__t b{display:block;font-weight:600}
+  .sem__t span{color:var(--muted);font-family:var(--font-mono);font-size:10px}
+
+  /* Type */
+  .spec{border:1px solid var(--border);border-radius:var(--r-md);background:#fff;padding:22px;margin-bottom:14px}
+  .spec .meta{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:12px;gap:12px}
+  .t-hero{font-family:var(--font-display);font-weight:700;font-size:56px;line-height:1;letter-spacing:-.03em}
+  .t-h1{font-family:var(--font-display);font-weight:600;font-size:34px;letter-spacing:-.02em}
+  .t-h2{font-family:var(--font-display);font-weight:600;font-size:22px}
+  .t-lead{font-family:var(--font-ui);font-size:19px;color:var(--text-2)}
+  .t-body{font-family:var(--font-ui);font-size:15px}
+  .t-mono{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .t-num{font-family:var(--font-display);font-weight:700;font-size:64px;letter-spacing:-.03em;color:var(--fast)}
+
+  /* Scales */
+  .scaleline{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+  .scaleline .box{background:linear-gradient(90deg,var(--blue-500),var(--blue-300));border-radius:6px;height:20px}
+  .scaleline code{min-width:120px}
+  .radii{display:flex;gap:16px;flex-wrap:wrap}
+  .radii div{width:84px;height:60px;background:#fff;border:1px solid var(--border);display:grid;place-items:center;font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+  .elev{display:flex;gap:18px;flex-wrap:wrap}
+  .elev div{width:150px;height:84px;background:#fff;border-radius:var(--r-md);display:grid;place-items:end center;padding-bottom:10px;font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+
+  /* Buttons */
+  .btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:11px 12px 11px 22px;border:1px solid transparent;border-radius:var(--r-pill);font-family:var(--font-ui);font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:background var(--dur) var(--ease-smooth),color var(--dur) var(--ease-smooth),border-color var(--dur) var(--ease-smooth),transform .12s var(--ease-smooth),filter var(--dur) var(--ease-smooth)}
+  .btn__a{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:var(--r-pill);transition:transform var(--dur) var(--ease-spring)}
+  .btn:hover .btn__a{transform:translate(3px,-3px)}
+  .btn:active{transform:translateY(1px)}
+  .btn[disabled]{opacity:.5;cursor:not-allowed;pointer-events:none}
+  .btn--primary{background:var(--ink-900);color:#fff}
+  .btn--primary .btn__a{background:rgba(255,255,255,.16)}
+  .btn--primary:hover{background:var(--blue-500)}
+  .btn--blue{color:#fff;background:linear-gradient(135deg,var(--blue-500),var(--violet-500))}
+  .btn--blue .btn__a{background:rgba(255,255,255,.2)}
+  .btn--blue:hover{filter:brightness(1.06)}
+  .btn--glass{background:rgba(255,255,255,.55);backdrop-filter:blur(14px);border-color:rgba(255,255,255,.8);color:var(--ink-900);box-shadow:var(--shadow-card)}
+  .btn--glass .btn__a{background:rgba(20,23,26,.08)}
+  .btn--glass:hover{background:#fff}
+  .btn--light{background:#e7f0ff;color:var(--blue-700)}
+  .btn--light .btn__a{background:rgba(31,79,215,.14);color:var(--blue-700)}
+  .btn--light:hover{background:#d8e6ff}
+  .btn--ghost{background:transparent;border-color:var(--border-2);color:var(--ink-900)}
+  .btn--ghost .btn__a{background:rgba(20,23,26,.06)}
+  .btn--ghost:hover{border-color:var(--ink-900)}
+  .arrow{width:15px;height:15px}
+  .btnsrow{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .statecol{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .statecol .lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+
+  /* Inputs */
+  .field{display:flex;flex-direction:column;gap:6px;max-width:300px}
+  .field span{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .input{width:100%;background:#fff;border:1px solid var(--border-2);border-radius:var(--r-sm);padding:12px 14px;font-family:var(--font-ui);font-size:15px;color:var(--text);transition:border-color var(--dur),box-shadow var(--dur)}
+  .input::placeholder{color:var(--dim)}
+  .input.is-focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+  .input.is-error{border-color:var(--coral-500);box-shadow:0 0 0 3px color-mix(in srgb,var(--coral-500) 16%,transparent)}
+  .field .err{color:var(--coral-500);font-size:12px}
+
+  /* Cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:720px){.cards{grid-template-columns:1fr}}
+  .card{border-radius:var(--r-lg);padding:22px}
+  .card h3{font-family:var(--font-display);font-weight:600;font-size:18px;margin:0 0 6px}
+  .card p{font-size:14px;color:var(--text-2);margin:0}
+  .card--white{background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-card)}
+  .card--glass{background:rgba(255,255,255,.6);backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(255,255,255,.8);box-shadow:var(--shadow-glass)}
+  .card--dark{background:var(--dark-800);border:1px solid rgba(255,255,255,.08);color:#fff}
+  .card--dark p{color:var(--on-dark)}
+  .cards-bg{position:relative;border-radius:var(--r-lg);padding:24px;overflow:hidden;background:
+    radial-gradient(50% 60% at 20% 10%,rgba(47,107,242,.16),transparent 70%),
+    radial-gradient(46% 56% at 86% 90%,rgba(31,157,87,.12),transparent 70%),var(--paper-100)}
+
+  /* Badges */
+  .badges{display:flex;flex-wrap:wrap;gap:12px}
+  .badge{font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:var(--r-pill)}
+  .badge--fast{background:color-mix(in srgb,var(--fast) 14%,transparent);color:var(--green-700)}
+  .badge--qualify{background:color-mix(in srgb,var(--qualify) 14%,transparent);color:var(--violet-500)}
+  .badge--followup{background:color-mix(in srgb,var(--followup) 14%,transparent);color:var(--coral-500)}
+  .badge--pending{background:var(--paper-100);color:var(--muted)}
+
+  /* Assembled hero */
+  .hero{position:relative;border-radius:var(--r-lg);overflow:hidden;padding:clamp(36px,6vw,72px);
+    background:
+      radial-gradient(34% 50% at 22% 16%,rgba(47,107,242,.18),transparent 66%),
+      radial-gradient(34% 46% at 82% 20%,rgba(109,86,207,.16),transparent 66%),
+      radial-gradient(40% 50% at 80% 92%,rgba(224,98,63,.12),transparent 66%),
+      linear-gradient(180deg,#fbfcff,#f3f5fb)}
+  .hero__eyebrow{margin-bottom:20px}
+  .hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(40px,6vw,76px);line-height:1;letter-spacing:-.035em;margin:0;max-width:14ch}
+  .hero h1 .green{color:var(--fast)} .hero h1 .slate{color:var(--slate)}
+  .hero__sub{font-size:clamp(16px,1.5vw,19px);color:#5f6670;max-width:520px;margin:22px 0 30px}
+  .hero__cta{display:flex;flex-wrap:wrap;gap:13px;margin-bottom:40px}
+  .hero__stats{display:flex;gap:14px;flex-wrap:wrap}
+  .glasscard{position:relative;background:rgba(255,255,255,.62);backdrop-filter:blur(20px) saturate(1.5);border:1px solid rgba(255,255,255,.85);border-radius:var(--r-md);padding:16px 18px;box-shadow:var(--shadow-glass);min-width:170px}
+  .glasscard .l{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .glasscard .n{font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:-.03em;line-height:1.05}
+  .foot{padding:50px 0 80px;color:var(--muted);font-size:13px}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  @media(max-width:720px){.twocol{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="wrap cover">
+  <div class="cover__glows"></div>
+  <div class="cover__in">
+    <div class="kick">Replyte · Design System v1</div>
+    <span class="pill-dot">● One system, two surfaces</span>
+    <h1 style="margin-top:22px">The <span class="g">Replyte</span> style guide.</h1>
+    <p>One token set powering both the expressive marketing surface and the calm product surface. Space Grotesk display, DM Sans UI, DM Mono labels, a functional multi-accent palette, glass + soft glows. Approve the <em>system</em> here — every screen inherits it.</p>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span>01</span> — <b>Color</b></div>
+  <h2 class="h">Functional multi-accent, on warm paper.</h2>
+  <p class="sub">Primitives are raw ramps; semantic tokens carry meaning. Each accent means one thing: blue = brand/action, green = fast/success, violet = qualify, coral = follow-up, slate = the slow benchmark.</p>
+
+  <div class="t-mono" style="margin-bottom:10px">Primitives</div>
+  <div class="swatches">
+    <div class="sw" style="background:#1d4fd7">blue-700</div>
+    <div class="sw" style="background:#2f6bf2">blue-500</div>
+    <div class="sw" style="background:#5b8dff">blue-300</div>
+    <div class="sw" style="background:#0f6b3a">green-700</div>
+    <div class="sw" style="background:#1f9d57">green-500</div>
+    <div class="sw" style="background:#3ddc84;color:#14171a">green-300</div>
+    <div class="sw" style="background:#6d56cf">violet-500</div>
+    <div class="sw" style="background:#a78bff;color:#14171a">violet-300</div>
+    <div class="sw" style="background:#e0623f">coral-500</div>
+    <div class="sw" style="background:#f0815f">coral-300</div>
+    <div class="sw" style="background:#14171a">ink-900</div>
+    <div class="sw" style="background:#6b7785">slate-500</div>
+    <div class="sw dk" style="background:#ffffff">paper-0</div>
+    <div class="sw dk" style="background:#f7f8f9">paper-50</div>
+    <div class="sw dk" style="background:#f4f4f1">paper-100</div>
+    <div class="sw dk" style="background:#e3e6e9">line</div>
+    <div class="sw" style="background:#1a1e26">dark-800</div>
+    <div class="sw" style="background:#0d0f13">dark-900</div>
+  </div>
+
+  <div class="t-mono" style="margin:22px 0 10px">Semantic roles</div>
+  <div class="sem">
+    <div class="sem__chip"><div class="sem__bar" style="background:#2f6bf2"></div><div class="sem__t"><b>accent</b><span>brand · action</span></div></div>
+    <div class="sem__chip"><div class="sem__bar" style="background:#1f9d57"></div><div class="sem__t"><b>fast</b><span>success · 8s</span></div></div>
+    <div class="sem__chip"><div class="sem__bar" style="background:#6d56cf"></div><div class="sem__t"><b>qualify</b><span>AI qualifier</span></div></div>
+    <div class="sem__chip"><div class="sem__bar" style="background:#e0623f"></div><div class="sem__t"><b>followup</b><span>never cold</span></div></div>
+    <div class="sem__chip"><div class="sem__bar" style="background:#6b7785"></div><div class="sem__t"><b>slow</b><span>15h benchmark</span></div></div>
+    <div class="sem__chip"><div class="sem__bar" style="background:#14171a"></div><div class="sem__t"><b>text</b><span>primary ink</span></div></div>
+    <div class="sem__chip"><div class="sem__bar" style="background:#6b7280"></div><div class="sem__t"><b>muted</b><span>secondary</span></div></div>
+    <div class="sem__chip"><div class="sem__bar" style="background:#0d0f13"></div><div class="sem__t"><b>surface-dark</b><span>dark sections</span></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span>02</span> — <b>Typography</b></div>
+  <h2 class="h">Space Grotesk · DM Sans · DM Mono.</h2>
+  <p class="sub">Display serif is banned (no Fraunces). Space Grotesk does headlines + the hero numbers; DM Sans is the UI workhorse; DM Mono carries eyebrows, labels, and data.</p>
+
+  <div class="spec"><div class="meta"><span>Display — Space Grotesk 700 — headlines & numbers</span><span>clamp(40–88px)</span></div>
+    <div class="t-hero">Answer every buyer in 8s.</div>
+    <div class="t-num" style="margin-top:8px">8s <span style="color:var(--slate);font-size:32px;font-weight:600">vs</span> <span style="color:var(--slate)">15h</span></div>
+  </div>
+  <div class="twocol">
+    <div class="spec"><div class="meta"><span>UI — DM Sans</span><span>15–19px</span></div>
+      <div class="t-h2" style="font-family:var(--font-ui);font-weight:600">Heading / DM Sans 600</div>
+      <p class="t-lead" style="margin:8px 0 0">Lead paragraph — the calm workhorse for body and UI copy, set at a comfortable measure.</p>
+      <p class="t-body" style="margin:8px 0 0">Body 15px · the default reading size across product surfaces.</p>
+    </div>
+    <div class="spec"><div class="meta"><span>Mono — DM Mono</span><span>labels · data</span></div>
+      <div class="t-mono" style="margin-bottom:8px">RESPONSE · 02 / 05</div>
+      <div class="t-mono" style="margin-bottom:8px">RESPONDED · 00:08.0</div>
+      <div class="t-mono">QUALIFIED · BOOKING SENT</div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span>03</span> — <b>Spacing · Radii · Elevation · Motion</b></div>
+  <h2 class="h">The rhythm everything snaps to.</h2>
+  <div class="twocol">
+    <div>
+      <div class="t-mono" style="margin-bottom:10px">Spacing scale (px)</div>
+      <div class="scaleline"><code>4 · xs</code><span class="box" style="width:4px"></span></div>
+      <div class="scaleline"><code>8 · sm</code><span class="box" style="width:8px"></span></div>
+      <div class="scaleline"><code>16 · md</code><span class="box" style="width:16px"></span></div>
+      <div class="scaleline"><code>24 · lg</code><span class="box" style="width:24px"></span></div>
+      <div class="scaleline"><code>48 · xl</code><span class="box" style="width:48px"></span></div>
+      <div class="scaleline"><code>72 · 2xl</code><span class="box" style="width:72px"></span></div>
+      <div class="t-mono" style="margin:22px 0 10px">Radii</div>
+      <div class="radii"><div style="border-radius:12px">sm 12</div><div style="border-radius:16px">md 16</div><div style="border-radius:22px">lg 22</div><div style="border-radius:999px">pill</div></div>
+    </div>
+    <div>
+      <div class="t-mono" style="margin-bottom:10px">Elevation</div>
+      <div class="elev">
+        <div style="box-shadow:var(--shadow-card)">card</div>
+        <div style="box-shadow:var(--shadow-glass)">glass</div>
+        <div style="box-shadow:var(--shadow-pop)">pop</div>
+      </div>
+      <div class="t-mono" style="margin:22px 0 10px">Motion</div>
+      <p class="t-body" style="color:var(--text-2)">Spring <code>cubic-bezier(.16,1,.32,1)</code> for entrances/arrows · Smooth <code>cubic-bezier(.2,0,0,1)</code> for state · duration <code>.3s</code>. Honour <code>prefers-reduced-motion</code>.</p>
+      <div class="t-mono" style="margin:22px 0 10px">Breakpoints</div>
+      <p class="t-body" style="color:var(--text-2)">Mobile-first: <code>600 · 760 · 900 · 1140</code>. Build small → up.</p>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span>04</span> — <b>Buttons</b></div>
+  <h2 class="h">One pill, five variants, real states.</h2>
+  <p class="sub">Every button = label + a circular arrow that nudges up-right on hover (the interaction you liked). Hover them.</p>
+  <div class="btnsrow" style="margin-bottom:26px">
+    <a class="btn btn--primary">See the live demo <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a>
+    <a class="btn btn--blue">Watch it text you <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a>
+    <a class="btn btn--glass">Book a call <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#14171a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a>
+    <a class="btn btn--light">Take a tour <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#1d4fd7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a>
+    <a class="btn btn--ghost">Learn more <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#14171a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a>
+  </div>
+  <div class="row">
+    <div class="statecol"><span class="lbl">default</span><a class="btn btn--primary">Button <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a></div>
+    <div class="statecol"><span class="lbl">hover (fills blue)</span><a class="btn btn--primary" style="background:var(--blue-500)">Button <span class="btn__a" style="transform:translate(3px,-3px)"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a></div>
+    <div class="statecol"><span class="lbl">disabled</span><a class="btn btn--primary" disabled>Button <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span>05</span> — <b>Inputs · Badges</b></div>
+  <h2 class="h">Form fields & status.</h2>
+  <div class="row" style="gap:32px">
+    <label class="field"><span>Default</span><input class="input" placeholder="(555) 555-0123"></label>
+    <label class="field"><span>Focus</span><input class="input is-focus" value="Jordan Avery"></label>
+    <label class="field"><span>Error</span><input class="input is-error" value="not-an-email"><span class="err">Please enter a valid email</span></label>
+  </div>
+  <div class="badges" style="margin-top:28px">
+    <span class="badge badge--fast">Responded 8s</span>
+    <span class="badge badge--qualify">Qualified</span>
+    <span class="badge badge--followup">Following up</span>
+    <span class="badge badge--pending">Pending</span>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow"><span>06</span> — <b>Cards & surfaces</b></div>
+  <h2 class="h">Glass for marketing, clean for product.</h2>
+  <div class="cards-bg">
+    <div class="cards">
+      <div class="card card--glass"><h3>Glass</h3><p>Frosted + soft glow. Marketing/hero surfaces over imagery.</p></div>
+      <div class="card card--white"><h3>Clean</h3><p>White, hairline border, soft shadow. Product/dashboard surfaces.</p></div>
+      <div class="card card--dark"><h3>Dark</h3><p>For dark sections — high-contrast feature blocks.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section style="border-top:none"><div class="wrap">
+  <div class="eyebrow"><span>07</span> — <b>Assembled — hero</b></div>
+  <h2 class="h">The system, composed.</h2>
+  <div class="hero">
+    <div class="eyebrow hero__eyebrow"><span class="pill-dot">● Speed-to-lead for real estate</span></div>
+    <h1>Answer every buyer in <span class="green">8 seconds.</span> Not <span class="slate">15 hours.</span></h1>
+    <p class="hero__sub">The first agent to reply wins the deal 78% of the time. An AI texts your buyers back instantly, qualifies them, and books the viewing — branded as your agency.</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary">Watch it text you <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a>
+      <a class="btn btn--glass">Book a 15-min call <span class="btn__a"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="#14171a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 18 9M11 9h7v7"/></svg></span></a>
+    </div>
+    <div class="hero__stats">
+      <div class="glasscard"><span class="l">Response time</span><div class="n" style="color:var(--fast)">8.0s</div></div>
+      <div class="glasscard"><span class="l">Lead</span><div style="font-weight:600;margin-top:4px">Jordan Mills</div><span class="badge badge--qualify" style="margin-top:6px;display:inline-block">Qualified</span></div>
+      <div class="glasscard"><span class="l">Industry average</span><div class="n" style="color:var(--slate)">15h</div></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="wrap foot">
+  Replyte Design System v1 · fonts: Space Grotesk / DM Sans / DM Mono (all loaded live) · tokens shown are the real values to ship as SCSS <code>$</code> vars → CSS custom properties (primitive → semantic → component).
+</div>
+
+</body>
+</html>

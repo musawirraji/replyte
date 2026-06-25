@@ -1,31 +1,70 @@
-// ─── Speed-to-Lead design tokens ────────────────────────────
-// Restrained, editorial real-estate language: lots of whitespace, hairline
-// rules, one accent colour. The accent is per-prospect — the base value
-// here is the fallback; the listing page overrides --sl-accent at runtime
-// from the prospect's primary_color (the one allowed dynamic inline value).
+// ─── Replyte design system — tokens (single source of truth) ─
+// PRIMITIVES are raw values; SEMANTIC tokens carry meaning and derive from
+// them. The product/app names ($sl-*) and marketing names ($mkt-*) are kept
+// for backwards compat and now BOTH derive from the primitives, so changing a
+// primitive cascades everywhere. The rendered reference is docs/styleguide.html.
 //
 // Auto-injected into every SCSS entry point via next.config.ts
 // (sassOptions.additionalData: `@use "tokens" as *;`).
+// NOTE: the marketing landing (replyteMarkup.ts) is verbatim inline HTML with
+// hardcoded hex that MATCHES these primitives but does not consume them.
 
-// Color ------------------------------------------------------
-$sl-ink: #14171a; // near-black, primary text
-$sl-ink-2: #3d444c; // secondary heading ink
-$sl-surface: #ffffff; // page background
-$sl-surface-2: #f7f8f9; // cards, input background
-$sl-surface-3: #eef0f2; // gallery placeholder, wells
-$sl-border: #e3e6e9; // dividers, card borders
-$sl-border-2: #d2d7dc; // input field border
-$sl-muted: #6b7280; // secondary text
-$sl-dim: #9aa1a9; // labels, captions
-$sl-accent: #1f6feb; // brand accent (overridden per prospect)
-$sl-accent-ink: #ffffff; // text on accent
-$sl-good: #1f9d57; // "responded fast" green
-$sl-warn: #b54708; // benchmark / slow amber
-
-// Typography -------------------------------------------------
-$font-display: "Space Grotesk", "DM Sans", system-ui, sans-serif; // listing headline + hero number (clean geometric, no serif)
+// ═══ PRIMITIVES ═════════════════════════════════════════════
+// Accent ramps
+$blue-700: #1d4fd7;
+$blue-500: #2f6bf2;
+$blue-300: #5b8dff;
+$green-700: #0f6b3a;
+$green-500: #1f9d57;
+$green-300: #3ddc84;
+$violet-700: #7c63d8;
+$violet-500: #6d56cf;
+$violet-300: #a78bff;
+$coral-500: #e0623f;
+$coral-300: #f0815f;
+$amber-600: #b54708;
+// Ink / neutrals
+$ink-900: #14171a;
+$ink-700: #3d444c;
+$slate-500: #6b7785;
+$gray-500: #6b7280;
+$gray-400: #9aa1a9;
+// Paper / lines
+$paper-0: #ffffff;
+$paper-50: #f7f8f9;
+$paper-100: #f4f4f1;
+$paper-150: #eef0f2;
+$paper-warm: #eceae5;
+$line: #e3e6e9;
+$line-2: #d2d7dc;
+$line-3: #e6e8ec;
+// Dark
+$dark-900: #0d0f13;
+$dark-800: #1a1e26;
+// Type families
+$font-display: "Space Grotesk", "DM Sans", system-ui, sans-serif;
 $font-ui: "DM Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+$font-mono: "DM Mono", ui-monospace, "SFMono-Regular", monospace;
+// Motion eases
+$ease-spring: cubic-bezier(0.16, 1, 0.32, 1);
+$ease-smooth: cubic-bezier(0.2, 0, 0, 1);
 
+// ═══ SEMANTIC — product/app surface ($sl-*) ═════════════════
+$sl-ink: $ink-900; // near-black, primary text
+$sl-ink-2: $ink-700; // secondary heading ink
+$sl-surface: $paper-0; // page background
+$sl-surface-2: $paper-50; // cards, input background
+$sl-surface-3: $paper-150; // gallery placeholder, wells
+$sl-border: $line; // dividers, card borders
+$sl-border-2: $line-2; // input field border
+$sl-muted: $gray-500; // secondary text
+$sl-dim: $gray-400; // labels, captions
+$sl-accent: $blue-500; // brand accent (overridden per prospect at runtime)
+$sl-accent-ink: $paper-0; // text on accent
+$sl-good: $green-500; // "responded fast" green
+$sl-warn: $amber-600; // benchmark / slow amber
+
+// Typography ------------------------------------------------- (display = $font-display, ui = $font-ui)
 // Font sizes (px)
 $fs-hero: 96px; // dashboard hero "8s"
 $fs-hero-sm: 56px; // hero on small screens
@@ -72,7 +111,7 @@ $gap-xl: 48px;
 $rule-1: 1px;
 
 // Motion -----------------------------------------------------
-$ease: cubic-bezier(0.2, 0, 0, 1);
+$ease: $ease-smooth;
 $dur-fast: 120ms;
 $dur: 220ms;
 
@@ -80,56 +119,49 @@ $dur: 220ms;
 $bp-sm: 640px;
 $bp-md: 880px;
 
-// ════════════════════════════════════════════════════════════
-// Marketing page tokens (Replyte landing — design handoff)
-// A distinct system from the listing page: Space Grotesk display,
-// DM Mono labels, and a deliberate MULTI-accent palette (not one brand
-// colour). Emitted as --sl-mkt-* CSS vars in globals.scss.
-// ════════════════════════════════════════════════════════════
+// ═══ SEMANTIC — marketing surface ($mkt-*) ═════════════════
+// Same primitives, expressive treatment (glass, glows, multi-accent).
+$font-mkt-display: $font-display;
+$font-mkt-mono: $font-mono;
 
-// Type ----------------------------------------------------------
-$font-mkt-display: "Space Grotesk", "DM Sans", system-ui, sans-serif; // headlines, big numbers
-$font-mkt-mono: "DM Mono", ui-monospace, "SFMono-Regular", monospace; // eyebrows, meta
+$mkt-ink: $ink-900;
+$mkt-ink-2: $ink-700;
+$mkt-muted: $gray-500;
+$mkt-muted-slate: $slate-500; // muted text AND the "slow / 15-hour" colour
+$mkt-dim: $gray-400;
+$mkt-white: $paper-0;
+$mkt-off: $paper-50;
+$mkt-warm-light: $paper-100;
+$mkt-warm-2: $paper-warm;
+$mkt-hairline: $line;
+$mkt-hairline-2: $line-3;
+$mkt-hairline-3: $paper-150;
+$mkt-dark-bg: $dark-900;
+$mkt-dark-surface: $dark-800;
 
-// Neutrals / ink ----------------------------------------------
-$mkt-ink: #14171a;
-$mkt-ink-2: #3d444c;
-$mkt-muted: #6b7280;
-$mkt-muted-slate: #6b7785; // muted text AND the "slow / 15-hour" functional colour
-$mkt-dim: #9aa1a9;
-$mkt-white: #ffffff;
-$mkt-off: #f7f8f9; // alt section bg
-$mkt-warm-light: #f4f4f1; // why-us bg
-$mkt-warm-2: #eceae5; // inactive faq tabs / demo bg
-$mkt-hairline: #e3e6e9;
-$mkt-hairline-2: #e6e8ec;
-$mkt-hairline-3: #eef0f2;
-$mkt-dark-bg: #0d0f13; // dark sections
-$mkt-dark-surface: #1a1e26; // dark phone body
+// Accent system (base / light / dark)
+$mkt-blue: $blue-500;
+$mkt-blue-light: $blue-300;
+$mkt-blue-dark: $blue-700;
+$mkt-green: $green-500; // fast / 8 seconds / success
+$mkt-green-light: $green-300;
+$mkt-green-dark: $green-700;
+$mkt-violet: $violet-500; // qualifies the lead
+$mkt-violet-light: $violet-300;
+$mkt-violet-dark: $violet-700;
+$mkt-coral: $coral-500; // never goes cold / follow-up
+$mkt-coral-light: $coral-300;
 
-// Accent system (base / light / dark) -------------------------
-$mkt-blue: #2f6bf2;
-$mkt-blue-light: #5b8dff;
-$mkt-blue-dark: #1d4fd7;
-$mkt-green: #1f9d57; // fast / 8 seconds / success
-$mkt-green-light: #3ddc84;
-$mkt-green-dark: #0f6b3a;
-$mkt-violet: #6d56cf; // qualifies the lead
-$mkt-violet-light: #a78bff;
-$mkt-violet-dark: #7c63d8;
-$mkt-coral: #e0623f; // never goes cold / follow-up
-$mkt-coral-light: #f0815f;
-
-// Radius / motion ---------------------------------------------
+// Radius / motion
 $mkt-r-pill: 999px;
 $mkt-r-card: 22px;
 $mkt-r-panel: 32px;
 $mkt-r-md: 16px;
 $mkt-r-sm: 12px;
-$mkt-ease-spring: cubic-bezier(0.16, 1, 0.32, 1);
-$mkt-ease-smooth: cubic-bezier(0.2, 0, 0, 1);
+$mkt-ease-spring: $ease-spring;
+$mkt-ease-smooth: $ease-smooth;
 
-// Marketing breakpoints ---------------------------------------
+// Marketing breakpoints
 $bp-mkt-lg: 820px; // hero/pinned collapse
 $bp-mkt-md: 760px; // stat/how/why/demo grids → single col
 $bp-mkt-sm: 600px; // hero floating stage hidden
