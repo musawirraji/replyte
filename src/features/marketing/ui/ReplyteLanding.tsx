@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { getCalApi } from "@calcom/embed-react";
 import { REPLYTE_HTML } from "../replyteMarkup";
 
 // ─── Replyte marketing landing ──────────────────────────────
@@ -26,6 +27,15 @@ export function ReplyteLanding() {
     const bind = (n: string) => qa(`[data-bind="${n}"]`);
     const setBind = (n: string, v: string) =>
       bind(n).forEach((el) => (el.textContent = v));
+
+    // Cal.com embed — open the booking modal in-page (fallback: external tab).
+    let calApi: ((action: string, opts?: unknown) => void) | null = null;
+    getCalApi()
+      .then((api) => {
+        calApi = api as unknown as (action: string, opts?: unknown) => void;
+        calApi("ui", { hideEventTypeDetails: false, layout: "month_view" });
+      })
+      .catch(() => {});
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const timers: ReturnType<typeof setInterval>[] = [];
@@ -502,7 +512,9 @@ export function ReplyteLanding() {
         window.location.href = "/demo-acres";
       },
       book: () =>
-        window.open("https://cal.com/musawir/30min", "_blank", "noopener,noreferrer"),
+        calApi
+          ? calApi("modal", { calLink: "musawir/30min", config: { layout: "month_view" } })
+          : window.open("https://cal.com/musawir/30min", "_blank", "noopener,noreferrer"),
       pcA: () => setCard(0),
       pcB: () => setCard(1),
       pcC: () => setCard(2),
